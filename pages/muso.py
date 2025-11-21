@@ -540,8 +540,17 @@ def authenticator_login():
 
     if  st.user.is_logged_in:
         #username = st.session_state.get("username")
-        profile_pic_url =  st.user.picture
+        #profile_pic_url =  st.user.picture
+
+        
         correo = st.user.email
+
+                           # Intentar leer la foto real del usuario
+        profile_pic_url = getattr(st.user, "picture", None)
+
+        # Si no existe, usar avatar fijo
+        if not profile_pic_url:
+            profile_pic_url = "https://www.gravatar.com/avatar/?d=mp&f=y"
 
 
         with cols_top[10]:
